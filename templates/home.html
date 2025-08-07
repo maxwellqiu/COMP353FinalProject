@@ -1,0 +1,6 @@
+{% extends "base.html" %}
+{% block content %}
+  <h1>Home</h1>
+  <!-- Requirement #3: one-click jump to Location page -->
+  <a href="{{ url_for('location_list') }}" class="btn btn-primary">Go to Location DB</a>
+{% endblock %}
