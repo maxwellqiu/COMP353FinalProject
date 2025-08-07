@@ -1,6 +1,9 @@
 {% extends "base.html" %}
+{% block title %}Home – Flask Demo{% endblock %}
 {% block content %}
-  <h1>Home</h1>
-  <!-- Requirement #3: one-click jump to Location page -->
-  <a href="{{ url_for('location_list') }}" class="btn btn-primary">Go to Location DB</a>
+    <div class="text-center">
+        <h1 class="display-5">Welcome</h1>
+        <p class="lead">Mini-CRUD demo built with Flask + Pandas.</p>
+        <a class="btn btn-primary" href="{{ url_for('database') }}">Go to Database</a>
+    </div>
 {% endblock %}
