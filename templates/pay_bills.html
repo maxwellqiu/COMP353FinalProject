@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block content %}
+  <h1>Pay Bills</h1>
+    <form method="post" class="row g-3">
+
+    <div class="col-md-4">
+          <label class="form-label">Club Member<span class="text-danger" title="requires">*</span></label>
+          <input type="number" step="1" class="form-control" name="ClubMember" value="" required aria-required='true'">
+    </div>
+
+    <div class="col-md-4">
+          <label class="form-label">Payment Date<span class="text-danger" title="requires">*</span></label>
+          <input type="date" class="form-control" name="PaymentDate" value="" required aria-required='true'">
+    </div>
+
+    <div class="col-md-4">
+          <label class="form-label">Amount<span class="text-danger" title="requires">*</span></label>
+          <input type="number" step="any" class="form-control" name="Amount" value="" required aria-required='true'">
+    </div>
+
+    <div class="col-md-4">
+          <label class="form-label">Payment Method<span class="text-danger" title="requires">*</span></label>
+          <select class="form-select" name="PaymentMethod" required aria-required='true'">
+                <option value=""></option>
+                <option value="Cash">Cash</option>
+                <option value="Debit">Debit</option>
+                <option value="Credit Card">Credit Card</option>
+          </select>
+    </div>
+
+    <div class="col-md-4">
+          <label class="form-label">Membership Year<span class="text-danger" title="requires">*</span></label>
+          <input type="number" step="1" class="form-control" name="Membership Year" value="" required aria-required='true'">
+    </div>
+    
+    <div class="col-12">
+      <button class="btn btn-primary">{{ action }}</button>
+      <a href="{{ url_for('home') }}" class="btn btn-secondary">Cancel</a>
+    </div>
+  </form>
+
+{% endblock %}

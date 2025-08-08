@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block content %}
+  <h1>Generate Email</h1>
+    <form method="post" class="row g-3">
+
+    <div class="col-md-4">
+          <label class="form-label">Current Sunday<span class="text-danger" title="requires">*</span></label>
+          <input type="date" class="form-control" name="curSunday" value="" required aria-required='true'">
+    </div>
+    
+    <div class="col-12">
+      <button class="btn btn-primary">{{ action }}</button>
+      <a href="{{ url_for('home') }}" class="btn btn-secondary">Cancel</a>
+    </div>
+  </form>
+
+{% endblock %}

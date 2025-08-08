@@ -1,12 +1,12 @@
 {% extends "base.html" %}
 {% block content %}
-  <h1>Database</h1>
+  <h1>Database & Queries</h1>
   <ul>
-    <li><a href="{{ url_for('location_list') }}">Location</a></li>
-    <li><em>Personnel (placeholder)</em></li>
-    <li><em>Family Member (placeholder)</em></li>
-    <li><em>Club Member (placeholder)</em></li>
-    <li><em>Team Formation (placeholder)</em></li>
-    <li><em>Log (placeholder)</em></li>
+    <li><a href="{{ url_for('generic_list', table='Location') }}">Location</a></li>
+    <li><a href="{{ url_for('generic_list', table='Personnel') }}">Personnel</a></li>
+    <li><a href="{{ url_for('generic_list', table='FamilyMember') }}">FamilyMember</a></li>
+    <li><a href="{{ url_for('generic_list', table='ClubMember') }}">ClubMember</a></li>
+    <li><a href="{{ url_for('generic_list', table='TeamFormation') }}">TeamFormation</a></li>
+    <li><a href="{{ url_for('generic_list', table='Log') }}">Log</a></li>
   </ul>
 {% endblock %}

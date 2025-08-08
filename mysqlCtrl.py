@@ -21,4 +21,4 @@ class MysqlCtrl:
         with self.engine.connect() as connection:
             connection.execution_options(isolation_level="AUTOCOMMIT")
             result = connection.execute(text(sql_stmt))
-        return pd.DataFrame(result.fetchall())
+        return pd.DataFrame(result.fetchall(), columns=result.keys())

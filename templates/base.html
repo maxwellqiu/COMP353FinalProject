@@ -12,14 +12,26 @@
 <!-- ────────────── Navbar ────────────── -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
-        <a class="navbar-brand" href="{{ url_for('home') }}">My App</a>
+        <a class="navbar-brand" href="{{ url_for('home') }}">Montreal Volleyball Club</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav">
             <span class="navbar-toggler-icon"></span>
         </button>
 
         <div id="nav" class="collapse navbar-collapse">
             <ul class="navbar-nav me-auto">
-                <li class="nav-item"><a class="nav-link" href="{{ url_for('database') }}">Database</a></li>
+                <!-- <li class="nav-item"><a class="nav-link" href="{{ url_for('database') }}">Database & Queries</a></li> -->
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('generic_list', table='Location') }}">Location</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('generic_list', table='Personnel') }}">Personnel</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('generic_list', table='FamilyMember') }}">FamilyMember</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('generic_list', table='ClubMember') }}">ClubMember</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('generic_list', table='Team') }}">Team</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('generic_list', table='TeamFormation') }}">TeamFormation</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('generic_list', table='PlaysIn') }}">PlaysIn</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('generic_list', table='Payment') }}">Payment</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('generic_list', table='MakePayment') }}">MakePayment</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('generic_list', table='Log') }}">Log</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('pay_bills') }}">Pay Bills</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('email') }}">Email</a></li>
             </ul>
         </div>
     </div>
@@ -42,7 +54,7 @@
 </main>
 
 <footer class="bg-light text-center py-3 mt-auto">
-    <small>&copy; <script>document.write(new Date().getFullYear());</script> My App</small>
+    <small>&copy; <script>document.write(new Date().getFullYear());</script> Montreal Volleyball Club</small>
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>

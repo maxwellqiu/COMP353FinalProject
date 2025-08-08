@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% block title %}{{ action }} {{ table }}{% endblock %}
+{% block content %}
+  <h1>{{ action }} {{ table }}</h1>
+  <form method="post" class="row g-3">
+    {% set is_create = (action == 'Create') %}
+    {% set is_edit = (action == 'Edit') %}
+
+    {% for c in cols %}
+      {% set is_pk = (c.column_key == 'PRI') %}
+      {% set t = (c.data_type or '')|lower %}
+      {% set is_required = (true if requires is defined and c.name in requires else false) %}
+
+      {# On create: omit PK entirely so backend can compute MAX+1 #}
+      {% if is_create and is_pk and table != 'PlaysIn' %}
+        {# intentionally render nothing for PK on create #}
+
+      {% elif is_edit and is_pk %}
+        <div class="col-md-4">
+          <label class="form-label">{{ c.name }} (PK)</label>
+          <input type="text" class="form-control" value="{{ data[c.name] }}" disabled>
+        </div>
+
+      {% else %}
+        <div class="col-md-4">
+          <label class="form-label">
+            {{ c.name }}
+            {% if is_required %}<span class="text-danger" title="requires">*</span>{% endif %}
+          </label>
+
+          {% if t == 'date' %}
+            <input type="date" class="form-control" name="{{ c.name }}" value="{{ data[c.name] | default('', true) }}" {{ 'required' if is_required else '' }} aria-required="{{ 'true' if is_required else 'false' }}">
+          {% elif t in ['datetime','timestamp'] %}
+            <input type="datetime-local" class="form-control" name="{{ c.name }}" value="{{ data[c.name] | default('', true) }}" {{ 'required' if is_required else '' }} aria-required="{{ 'true' if is_required else 'false' }}">
+          {% elif t in ['int','bigint','smallint','tinyint','mediumint'] %}
+            <input type="number" step="1" class="form-control" name="{{ c.name }}" value="{{ data[c.name] | default('', true) }}" {{ 'required' if is_required else '' }} aria-required="{{ 'true' if is_required else 'false' }}">
+          {% elif t in ['decimal','numeric','float','double','real'] %}
+            <input type="number" step="any" class="form-control" name="{{ c.name }}" value="{{ data[c.name] | default('', true) }}" {{ 'required' if is_required else '' }} aria-required="{{ 'true' if is_required else 'false' }}">
+          {% elif t in ['time'] %}
+            <input type="time" class="form-control" name="{{ c.name }}" value="{{ data[c.name] | default('', true) }}" {{ 'required' if is_required else '' }} aria-required="{{ 'true' if is_required else 'false' }}">
+          {% elif t in ['bit','boolean','bool'] %}
+            <select class="form-select" name="{{ c.name }}" {{ 'required' if is_required else '' }} aria-required="{{ 'true' if is_required else 'false' }}">
+              {% set v = (data[c.name] | default('', true) ) %}
+              <option value="1" {{ 'selected' if v in [1,'1',True,'true','True'] else '' }}>True</option>
+              <option value="0" {{ 'selected' if v in [0,'0',False,'false','False'] else '' }}>False</option>
+            </select>
+          {% elif options is defined and c.name in options and options[c.name] %}
+            {% set choices = options[c.name] %}
+              <select class="form-select" name="{{ c.name }}" {{ 'required' if is_required else '' }} aria-required="{{ 'true' if is_required else 'false' }}">
+                <option value=""></option> {# optional blank #}
+                {% for opt in choices %}
+                  <option value="{{ opt | default('', true) }}"
+                    {{ 'selected' if (data and data[c.name] == opt) else '' }}>
+                    {{ opt }}
+                  </option>
+                {% endfor %}
+              </select>
+          {% else %}
+            <input type="text" class="form-control" name="{{ c.name }}" value="{{ data[c.name] | default('', true) }}" {{ 'required' if is_required else '' }} aria-required="{{ 'true' if is_required else 'false' }}">
+          {% endif %}
+        </div>
+      {% endif %}
+    {% endfor %}
+    
+    <div class="col-12">
+      <button class="btn btn-primary">{{ action }}</button>
+      <a href="{{ url_for('generic_list', table=table) }}" class="btn btn-secondary">Cancel</a>
+    </div>
+  </form>
+{% endblock %}
